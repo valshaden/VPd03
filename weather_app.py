@@ -42,14 +42,11 @@ def get_coordinates_by_city(city: str) -> dict:
         return None
 
 if __name__ == "__main__":
-
-    print(API_KEY)
-    weather = get_current_weather(city="Приморск")
-    print(weather)
-    print(f"Город : {weather['name']}")
-    print(weather['weather'][0]['description'])
-    #print(f"Город : {weather['weather'][0]['description']}")
-    print(f"Температура : {weather['main']['temp']}°C")
-    #weather = get_weather_by_coordinates(55.7558, 37.6173)
-    #print(weather)
+    city = input("Введите название города: ")
+    weather = get_current_weather(city=city)
+    if weather:
+        temp = weather['main']['temp']
+        description = weather['weather'][0]['description']
+        city_name = weather['name']
+        print(f"Погода в {city_name}: {temp}°C, {description}")
     
