@@ -42,11 +42,30 @@ def get_coordinates_by_city(city: str) -> dict:
         return None
 
 if __name__ == "__main__":
-    city = input("Введите название города: ")
-    weather = get_current_weather(city=city)
-    if weather:
-        temp = weather['main']['temp']
-        description = weather['weather'][0]['description']
-        city_name = weather['name']
-        print(f"Погода в {city_name}: {temp}°C, {description}")
+    while True:
+        print("\nРежимы ввода:")
+        print("1 — по городу")
+        print("2 — по координатам")
+        print("0 — выход")
+        
+        choice = input("Выберите режим: ")
+        
+        if choice == "0":
+            break
+        elif choice == "1":
+            city = input("Введите название города: ")
+            weather = get_current_weather(city=city)
+        elif choice == "2":
+            latitude = float(input("Введите широту: "))
+            longitude = float(input("Введите долготу: "))
+            weather = get_current_weather(latitude=latitude, longitude=longitude)
+        else:
+            print("Неверный выбор!")
+            continue
+            
+        if weather:
+            temp = weather['main']['temp']
+            description = weather['weather'][0]['description']
+            city_name = weather['name']
+            print(f"Погода в {city_name}: {temp}°C, {description}")
     
