@@ -13,7 +13,7 @@ def read_from_file(path="currency_rate.json"):
     with open(path, "r", encoding="utf-8") as file:
         return json.load(file)
 
-def is_file_fresh(path, hours=24):
+def is_file_fresh(path, hours=2):
     if not os.path.exists(path):
         return False
     file_age = time.time() - os.path.getmtime(path)

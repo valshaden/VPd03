@@ -1,4 +1,4 @@
-from storage import get_rates
+from storage import get_rates, update_currency_rates
 
 def show_rates(base, targets=["RUB", "EUR", "GBP"]):
     data = get_rates(base)
@@ -43,6 +43,7 @@ def cli():
         print()
         print("1. Показать курсы валют")
         print("2. Конвертер суммы")
+        print("3. Обновить курсы")
         print("0. Выход")
         choice = input("Выберите действие: ").strip()
         
@@ -78,6 +79,8 @@ def cli():
                     print(f"{amount} {from_currency} = {result:.4f} {to_currency}")
             except ValueError:
                 print("Неверный формат суммы")
+        elif choice == "3":
+            update_currency_rates()
         else:
             print("Неверный выбор")
 
