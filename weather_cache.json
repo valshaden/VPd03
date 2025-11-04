@@ -1,51 +1,50 @@
 {
   "weather": {
     "coord": {
-      "lon": 73.3715,
-      "lat": 54.9914
+      "lon": 50.114,
+      "lat": 53.1986
     },
     "weather": [
       {
-        "id": 802,
+        "id": 804,
         "main": "Clouds",
-        "description": "переменная облачность",
-        "icon": "03n"
+        "description": "пасмурно",
+        "icon": "04d"
       }
     ],
     "base": "stations",
     "main": {
-      "temp": -10.01,
-      "feels_like": -17.01,
-      "temp_min": -10.01,
-      "temp_max": -10.01,
-      "pressure": 1031,
-      "humidity": 67,
-      "sea_level": 1031,
-      "grnd_level": 1019
+      "temp": 4.37,
+      "feels_like": 0.78,
+      "temp_min": 4.37,
+      "temp_max": 4.37,
+      "pressure": 1032,
+      "humidity": 61,
+      "sea_level": 1032,
+      "grnd_level": 1022
     },
     "visibility": 10000,
     "wind": {
-      "speed": 6,
-      "deg": 340
+      "speed": 4.55,
+      "deg": 189,
+      "gust": 9.41
     },
     "clouds": {
-      "all": 40
+      "all": 100
     },
-    "dt": 1762256295,
+    "dt": 1762256996,
     "sys": {
-      "type": 1,
-      "id": 8960,
       "country": "RU",
-      "sunrise": 1762222556,
-      "sunset": 1762255450
+      "sunrise": 1762227794,
+      "sunset": 1762261376
     },
-    "timezone": 21600,
-    "id": 1496153,
-    "name": "Омск",
+    "timezone": 14400,
+    "id": 499099,
+    "name": "Самара",
     "cod": 200
   },
-  "city": "Омск",
-  "lat": 54.991375,
-  "lon": 73.371529,
-  "fetched_at": "2025-11-04T14:41:21.095555"
+  "city": "Самара",
+  "lat": 53.198627,
+  "lon": 50.113987,
+  "fetched_at": "2025-11-04T14:49:55.752665"
 }

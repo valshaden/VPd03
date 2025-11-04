@@ -1,6 +1,7 @@
 import os
 import json
 import logging
+import time
 import requests
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -11,6 +12,31 @@ CACHE_FILE = "weather_cache.json"
 
 logging.basicConfig(filename='weather_errors.log', level=logging.ERROR, 
                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+def make_request_with_retry(url, request_type="запроса"):
+    delays = [1, 2, 4]
+    
+    for attempt in range(4):
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                return response
+            elif response.status_code == 429:
+                if attempt < 3:
+                    delay = delays[attempt]
+                    print(f"Превышен лимит запросов. Повтор через {delay}с...")
+                    time.sleep(delay)
+                    continue
+            return response
+        except requests.RequestException as e:
+            if attempt < 3:
+                delay = delays[attempt]
+                print(f"Сетевая ошибка. Повтор {request_type} через {delay}с...")
+                time.sleep(delay)
+            else:
+                raise e
+    return None
 
 
 def save_to_cache(weather_data, city=None, lat=None, lon=None):
@@ -69,14 +95,14 @@ def get_weather_by_coordinates(latitude: float, longitude: float, city: str = No
     url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}&units=metric&lang=ru"
     
     try:
-        response = requests.get(url)
-        if response.status_code == 200:
+        response = make_request_with_retry(url, "получения погоды")
+        if response and response.status_code == 200:
             weather_data = response.json()
             save_to_cache(weather_data, city, latitude, longitude)
             return weather_data
-        else:
+        elif response:
             print(f"Ошибка API: {response.status_code}")
-            return offer_cached_data()
+        return offer_cached_data()
     except requests.RequestException as e:
         logging.error(f"Сетевая ошибка при получении погоды: {e}")
         print("Сетевая ошибка при получении погоды")
@@ -86,17 +112,17 @@ def get_coordinates_by_city(city: str) -> tuple:
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={API_KEY}&units=metric&lang=ru"
     
     try:
-        response = requests.get(url)
-        if response.status_code == 200:
+        response = make_request_with_retry(url, "получения координат")
+        if response and response.status_code == 200:
             data = response.json()
             if data:
                 return data[0]['lat'], data[0]['lon']
-        print(f"Ошибка API: {response.status_code}")
+        elif response:
+            print(f"Ошибка API: {response.status_code}")
         return None, None
     except requests.RequestException as e:
         logging.error(f"Сетевая ошибка при получении координат: {e}")
         print("Сетевая ошибка при получении координат")
-
         return None, None
 
 if __name__ == "__main__":
