@@ -1,0 +1,51 @@
+{
+  "weather": {
+    "coord": {
+      "lon": 73.3715,
+      "lat": 54.9914
+    },
+    "weather": [
+      {
+        "id": 802,
+        "main": "Clouds",
+        "description": "переменная облачность",
+        "icon": "03n"
+      }
+    ],
+    "base": "stations",
+    "main": {
+      "temp": -10.01,
+      "feels_like": -17.01,
+      "temp_min": -10.01,
+      "temp_max": -10.01,
+      "pressure": 1031,
+      "humidity": 67,
+      "sea_level": 1031,
+      "grnd_level": 1019
+    },
+    "visibility": 10000,
+    "wind": {
+      "speed": 6,
+      "deg": 340
+    },
+    "clouds": {
+      "all": 40
+    },
+    "dt": 1762256295,
+    "sys": {
+      "type": 1,
+      "id": 8960,
+      "country": "RU",
+      "sunrise": 1762222556,
+      "sunset": 1762255450
+    },
+    "timezone": 21600,
+    "id": 1496153,
+    "name": "Омск",
+    "cod": 200
+  },
+  "city": "Омск",
+  "lat": 54.991375,
+  "lon": 73.371529,
+  "fetched_at": "2025-11-04T14:41:21.095555"
+}
